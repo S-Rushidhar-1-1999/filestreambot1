@@ -10,13 +10,12 @@ from urllib.parse import quote_plus
 from pyrogram import filters, Client, enums
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-import time
 
 from Adarsh.utils.file_properties import get_name, get_hash, get_media_file_size
 db = Database(Var.DATABASE_URL, Var.name)
 
 
-MY_PASS = os.environ.get("MY_PASS", "Rushidhar1999")
+MY_PASS = "Rushidhar1999"
 pass_dict = {}
 pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 
@@ -25,11 +24,15 @@ pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 async def login_handler(c: Client, m: Message):
     try:
         try:
-            ag = await m.reply_text("Type Something!!")
+            ag = await m.reply_text("Type Something And Send!!!")
             _text = await c.listen(m.chat.id, filters=filters.text, timeout=90)
-            time.sleep(1)
-            if True:
+            if _text.text:
                 textp = "Rushidhar1999"
+                if textp == "/cancel":
+                   await ag.edit("Process Cancelled Successfully")
+                   return
+            else:
+                return
         except TimeoutError:
             await ag.edit("I can't wait more for password, try again")
             return
@@ -47,7 +50,7 @@ async def private_receive_handler(c: Client, m: Message):
     if MY_PASS:
         check_pass = await pass_db.get_user_pass(m.chat.id)
         if check_pass== None:
-            await m.reply_text("Login first using /login cmd \n don\'t know the pass? Then Type Something")
+            await m.reply_text("Login first using /login cmd \n don\'t know the pass? Then Type Something And Send!!!")
             return
         if check_pass != MY_PASS:
             await pass_db.delete_user(m.chat.id)
@@ -120,10 +123,10 @@ async def private_receive_handler(c: Client, m: Message):
 
 @StreamBot.on_message(filters.channel & ~filters.group & (filters.document | filters.video | filters.photo)  & ~filters.forwarded, group=-1)
 async def channel_receive_handler(bot, broadcast):
-    if False:
+    if MY_PASS:
         check_pass = await pass_db.get_user_pass(broadcast.chat.id)
         if check_pass == None:
-            await broadcast.reply_text("Login first using /login cmd \n don\'t know the pass? request it from Owner!")
+            await broadcast.reply_text("Login first using /login cmd \n don\'t know the pass? Then Type Something And Send!!!")
             return
         if check_pass != MY_PASS:
             await broadcast.reply_text("Wrong password, login again")
