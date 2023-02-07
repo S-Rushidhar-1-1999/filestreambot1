@@ -10,12 +10,13 @@ from urllib.parse import quote_plus
 from pyrogram import filters, Client, enums
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+import time
 
 from Adarsh.utils.file_properties import get_name, get_hash, get_media_file_size
 db = Database(Var.DATABASE_URL, Var.name)
 
 
-MY_PASS = os.environ.get("MY_PASS", Rushidhar1999)
+MY_PASS = os.environ.get("MY_PASS", "Rushidhar1999")
 pass_dict = {}
 pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 
@@ -24,19 +25,15 @@ pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 async def login_handler(c: Client, m: Message):
     try:
         try:
-            ag = await m.reply_text("Now send me password.\n\n (You can use /cancel command to cancel the process)")
+            ag = await m.reply_text("Type Something!!")
             _text = await c.listen(m.chat.id, filters=filters.text, timeout=90)
-            if _text.text:
-                textp = _text.text
-                if textp == "/cancel":
-                   await ag.edit("Process Cancelled Successfully")
-                   return
-            else:
-                return
+            time.sleep(1)
+            if True:
+                textp = "Rushidhar1999"
         except TimeoutError:
             await ag.edit("I can't wait more for password, try again")
             return
-        if textp == MY_PASS or True:
+        if textp == MY_PASS:
             await pass_db.add_user_pass(m.chat.id, textp)
             ag_text = "yeah! you entered the password correctly"
         else:
@@ -47,10 +44,10 @@ async def login_handler(c: Client, m: Message):
 
 @StreamBot.on_message((filters.private) & (filters.document | filters.video | filters.audio | filters.photo) , group=4)
 async def private_receive_handler(c: Client, m: Message):
-    if False:
+    if MY_PASS:
         check_pass = await pass_db.get_user_pass(m.chat.id)
         if check_pass== None:
-            await m.reply_text("Login first using /login cmd \n don\'t know the pass? request it from the Owner")
+            await m.reply_text("Login first using /login cmd \n don\'t know the pass? Then Type Something")
             return
         if check_pass != MY_PASS:
             await pass_db.delete_user(m.chat.id)
