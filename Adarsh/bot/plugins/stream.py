@@ -15,7 +15,7 @@ from Adarsh.utils.file_properties import get_name, get_hash, get_media_file_size
 db = Database(Var.DATABASE_URL, Var.name)
 
 
-MY_PASS = os.environ.get("MY_PASS", None)
+MY_PASS = os.environ.get("MY_PASS", Rushidhar1999)
 pass_dict = {}
 pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 
@@ -36,7 +36,7 @@ async def login_handler(c: Client, m: Message):
         except TimeoutError:
             await ag.edit("I can't wait more for password, try again")
             return
-        if textp == MY_PASS:
+        if textp == MY_PASS or True:
             await pass_db.add_user_pass(m.chat.id, textp)
             ag_text = "yeah! you entered the password correctly"
         else:
@@ -47,7 +47,7 @@ async def login_handler(c: Client, m: Message):
 
 @StreamBot.on_message((filters.private) & (filters.document | filters.video | filters.audio | filters.photo) , group=4)
 async def private_receive_handler(c: Client, m: Message):
-    if MY_PASS:
+    if False:
         check_pass = await pass_db.get_user_pass(m.chat.id)
         if check_pass== None:
             await m.reply_text("Login first using /login cmd \n don\'t know the pass? request it from the Owner")
@@ -123,7 +123,7 @@ async def private_receive_handler(c: Client, m: Message):
 
 @StreamBot.on_message(filters.channel & ~filters.group & (filters.document | filters.video | filters.photo)  & ~filters.forwarded, group=-1)
 async def channel_receive_handler(bot, broadcast):
-    if MY_PASS:
+    if False:
         check_pass = await pass_db.get_user_pass(broadcast.chat.id)
         if check_pass == None:
             await broadcast.reply_text("Login first using /login cmd \n don\'t know the pass? request it from Owner!")
