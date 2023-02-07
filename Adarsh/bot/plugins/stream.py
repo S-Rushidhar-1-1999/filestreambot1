@@ -108,7 +108,7 @@ async def private_receive_handler(c: Client, m: Message):
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("✨ STREAM TO PLAYER ✨", url=f"https://stream.url2go.in/st?api=af5e38dfaf8b900b45335173d279b44d7ae4b2e9&url={online_link}")], #Stream To Player
+                   #[InlineKeyboardButton("✨ STREAM TO PLAYER ✨", url=f"https://stream.url2go.in/st?api=af5e38dfaf8b900b45335173d279b44d7ae4b2e9&url={online_link}")], #Stream To Player
                     [InlineKeyboardButton("🖥 STREAM 🖥", url=stream_link)], #Stream Link
                     [InlineKeyboardButton("📥 DOWNLOAD 📥", url=online_link)], #Online Link
                     [InlineKeyboardButton("❤️ SOURCE CODE ❤️", url="https://github.com/Adarsh-Goel/Filestreambot-pro/")]
@@ -151,7 +151,7 @@ async def channel_receive_handler(bot, broadcast):
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("✨ STREAM TO PLAYER ✨", url=f"https://stream.url2go.in/st?api=af5e38dfaf8b900b45335173d279b44d7ae4b2e9&url={online_link}")], #Stream To Player
+                   #[InlineKeyboardButton("✨ STREAM TO PLAYER ✨", url=f"https://stream.url2go.in/st?api=af5e38dfaf8b900b45335173d279b44d7ae4b2e9&url={online_link}")], #Stream To Player
                     [InlineKeyboardButton("🖥 STREAM 🖥", url=stream_link)], #Stream Link
                     [InlineKeyboardButton("📥 DOWNLOAD 📥", url=online_link)], #Online Link
                     [InlineKeyboardButton("❤️ SOURCE CODE ❤️", url="https://github.com/Adarsh-Goel/Filestreambot-pro/")]  
